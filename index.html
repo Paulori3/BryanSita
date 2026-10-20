@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Schmalz - Pasión por España</title>
+    <style>
+        /* Grunddesign im Spanien-Look */
+        :root {
+            --spain-red: #AA151B;
+            --spain-yellow: #F1BF00;
+            --bg-color: #fdf5e6;
+            --text-color: #333;
+            --card-bg: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.8s ease, color 0.8s ease;
+            overflow-x: hidden;
+        }
+
+        /* Sangria-Modus Farben */
+        body.sangria-mode {
+            --bg-color: #4a0414; /* Tiefes Weinrot */
+            --text-color: #f9e4c0;
+            --card-bg: #63051a;
+            --spain-red: #800020;
+            --spain-yellow: #ffb7b2;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--spain-red) 0%, var(--spain-yellow) 50%, var(--spain-red) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.8s ease;
+        }
+
+        body.sangria-mode header {
+            background: linear-gradient(90deg, #2b0008 0%, #800020 50%, #2b0008 100%);
+            color: #ffd700;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.8s ease;
+        }
+
+        /* Schöne Buttons für die Verlinkungen */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            background-color: var(--spain-yellow);
+            color: var(--spain-red);
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Der dicke Sangria Button */
+        #sangria-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--spain-red);
+            color: var(--spain-yellow);
+            font-size: 1.5em;
+            padding: 20px;
+            border-radius: 12px;
+            border: 3px solid var(--spain-yellow);
+            margin-top: 40px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(170, 21, 27, 0.4);
+            transition: all 0.4s;
+        }
+
+        #sangria-btn:hover {
+            transform: scale(1.02);
+        }
+
+        body.sangria-mode #sangria-btn {
+            background-color: #ffd700;
+            color: #4a0414;
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Custom Notification Toast (ersetzt alert) */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+        }
+
+        .toast {
+            background-color: var(--spain-red);
+            color: white;
+            padding: 15px 25px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideIn 0.4s forwards, fadeOut 0.4s 2.5s forwards;
+        }
+
+        body.sangria-mode .toast {
+            background-color: #ffd700;
+            color: #4a0414;
+        }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateX(50px); }
+        }
+
+        /* Animation für fallende Wein-Emojis */
+        @keyframes fallAndSway {
+            0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 1; }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+        }
+
+        .wine-drop {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fallAndSway linear forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bryan Schmalz</h1>
+        <h2>El Señor de España 🇪🇸 | Amante de la Vida</h2>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h3>¡Hola y Bienvenidos!</h3>
+            <p>Willkommen auf der ultimativen Fan-Seite für <strong>Bryan Schmalz</strong>. Wenn es zwei Dinge gibt, die Bryan mehr liebt als alles andere auf der Welt, dann sind es die heiße Sonne Spaniens und das feurige Temperament wunderschöner Latinas.</p>
+            <p>Egal ob entspannen am Strand von Andalusien, Tapas essen in Madrid oder lange Nächte feiern – Bryan ist im Herzen ein echter Spanier.</p>
+        </div>
+
+        <div class="card">
+            <h3>Bryans Favoriten (Interaktiv)</h3>
+            <p>Klick dich durch Bryans größte Leidenschaften:</p>
+            
+            <div class="link-grid">
+                <button class="action-btn" onclick="showToast('💃 Latina-Modus: Salsa-Playlist wurde virtuell gestartet! ¡Ay, caramba!')">
+                    💃 Latina Vibes
+                </button>
+                <button class="action-btn" onclick="showToast('🏖️ Flug gebucht! Nächster Halt: Mallorca, Playa de Palma.')">
+                    🏖️ Nächster Urlaub
+                </button>
+                <button class="action-btn" onclick="showToast('🥘 Tapas-Time: Jamón Ibérico und Patatas Bravas sind bestellt.')">
+                    🥘 Tapas bestellen
+                </button>
+                <button class="action-btn" onclick="showToast('🇪🇸 ¡Viva España! Bryans Herz schlägt rot-gelb-rot.')">
+                    🇪🇸 Liebe zu Spanien
+                </button>
+            </div>
+        </div>
+
+        <!-- Der legendäre Sangria Button -->
+        <button id="sangria-btn" onclick="toggleSangria()">
+            🍷 SANGRIA-MODUS AKTIVIEREN 🍷
+        </button>
+
+    </div>
+
+    <!-- Container für unsere Pop-up Benachrichtigungen -->
+    <div id="toast-container"></div>
+
+    <script>
+        let sangriaInterval;
+
+        // Custom Notification Funktion
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            
+            container.appendChild(toast);
+
+            // Toast nach der Animation wieder aus dem DOM entfernen (nach 3 Sekunden)
+            setTimeout(() => {
+                if(toast.parentElement) {
+                    toast.remove();
+                }
+            }, 3000);
+        }
+
+        // Sangria Modus umschalten
+        function toggleSangria() {
+            const body = document.body;
+            const btn = document.getElementById('sangria-btn');
+
+            body.classList.toggle('sangria-mode');
+
+            if (body.classList.contains('sangria-mode')) {
+                // Modus AN
+                btn.innerText = "🍇 SANGRIA-MODUS DEAKTIVIEREN 🍇";
+                showToast("¡Salud! Der Sangria-Modus ist an. Lass den Wein fließen!");
+                startRain();
+            } else {
+                // Modus AUS
+                btn.innerText = "🍷 SANGRIA-MODUS AKTIVIEREN 🍷";
+                showToast("Zurück im normalen Spanien-Modus. Siesta!");
+                stopRain();
+            }
+        }
+
+        // Regen-Animation generieren
+        function startRain() {
+            const emojis = ['🍷', '🍇', '🩸', '🍹', '🍓'];
+            
+            sangriaInterval = setInterval(() => {
+                const drop = document.createElement('div');
+                drop.className = 'wine-drop';
+                
+                // Zufälliges Emoji
+                drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Zufällige Startposition (X-Achse)
+                drop.style.left = Math.random() * 100 + 'vw';
+                
+                // Zufällige Fallgeschwindigkeit (zwischen 2 und 5 Sekunden)
+                const duration = Math.random() * 3 + 2;
+                drop.style.animationDuration = duration + 's';
+                
+                // Zufällige Größe
+                drop.style.fontSize = (Math.random() * 20 + 20) + 'px';
+
+                document.body.appendChild(drop);
+
+                // Element entfernen, wenn es unten angekommen ist
+                setTimeout(() => {
+                    if(drop.parentElement) {
+                        drop.remove();
+                    }
+                }, duration * 1000);
+
+            }, 150); // Alle 150ms ein neuer Tropfen
+        }
+
+        // Regen stoppen
+        function stopRain() {
+            clearInterval(sangriaInterval);
+            
+            // Alle bestehenden Tropfen auf dem Bildschirm entfernen
+            const drops = document.querySelectorAll('.wine-drop');
+            drops.forEach(drop => drop.remove());
+        }
+    </script>
+</body>
+</html>
